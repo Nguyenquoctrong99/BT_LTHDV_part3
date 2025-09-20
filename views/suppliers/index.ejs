@@ -1,0 +1,14 @@
+<%- include('../partials/header') %>
+<h2>Suppliers</h2>
+<a href="/suppliers/form">Add Supplier</a>
+<br><br>
+
+<ul>
+  <% suppliers.forEach(s => { %>
+    <li>
+      <strong><%= s.name %></strong> - <%= s.phone %> - <%= s.address %>
+      | <a href="/suppliers/form/<%= s._id %>">Edit</a>
+      | <a href="/suppliers/delete/<%= s._id %>" onclick="return confirm('Delete this supplier?')">Delete</a>
+    </li>
+  <% }) %>
+</ul>

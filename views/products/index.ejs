@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+<h2>Products</h2>
+<a href="/products/form">Add Product</a>
+<br><br>
+
+<form method="get" action="/products">
+  <input type="text" name="search" value="<%= search || '' %>" placeholder="Search by name">
+  <select name="supplier">
+    <option value="">All Suppliers</option>
+    <% suppliers.forEach(s => { %>
+      <option value="<%= s._id %>" <%= selectedSupplier == s._id ? 'selected' : '' %>><%= s.name %></option>
+    <% }) %>
+  </select>
+  <button type="submit">Filter</button>
+</form>
+
+<ul>
+  <% products.forEach(p => { %>
+    <li>
+      <strong><%= p.name %></strong> - $<%= p.price %> - Qty: <%= p.quantity %>
+      <% if (p.supplier) { %>
+        (Supplier: <%= p.supplier.name %>)
+      <% } %>
+      | <a href="/products/form/<%= p._id %>">Edit</a>
+      | <a href="/products/delete/<%= p._id %>" onclick="return confirm('Delete this product?')">Delete</a>
+    </li>
+  <% }) %>
+</ul>
